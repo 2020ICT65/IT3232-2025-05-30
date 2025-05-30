@@ -28,6 +28,20 @@ public class DepartmentService {
         return repo.findById(id).get();
     }
 
+    public List<String>getDepartmentnames() {
+        if (repo.getDeptNames().isEmpty()) {
+            throw new EntityNotFoundException("Department Not Found!");
+        }
+        return repo.getDeptNames();
+    }
+
+    public List<Department> searchDept(String name) {
+        if (repo.searchByName(name).isEmpty()) {
+            throw new EntityNotFoundException("Department Not Found!");
+        }
+        return repo.searchByName(name);
+    }
+
     public Department addDept(Department department) {
         if(repo.findById(department.getDepId()).isPresent()){
             throw new DuplicateKeyException("Department Already existing!");
