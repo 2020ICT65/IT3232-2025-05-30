@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import jakarta.persistence.EntityNotFoundException;
 import me.chamodi.spring.sql.models.Department;
+import me.chamodi.spring.sql.models.ViewDepartment;
 import me.chamodi.spring.sql.repo.DepartmentRepo;
 
 @Service
@@ -42,6 +43,20 @@ public class DepartmentService {
         return repo.searchByName(name);
     }
 
+    public List<String> countEmployees(){
+        if(repo.countEmployees().isEmpty()){
+            throw new EntityNotFoundException("Department Not Found!");
+        }
+        return repo.countEmployees();
+    }
+
+    public int EmployeeCount(String depId){
+        if(repo.employeeCount(depId) == 0){
+            throw new EntityNotFoundException("Department Not Found!");
+        }
+        return repo.employeeCount(depId);
+    }
+
     public Department addDept(Department department) {
         if(repo.findById(department.getDepId()).isPresent()){
             throw new DuplicateKeyException("Department Already existing!");
@@ -50,6 +65,14 @@ public class DepartmentService {
         return department;
     }
 
+    public ViewDepartment getEmplCountView(String id){
+        if(repo.findById(id).isEmpty()){
+            throw new EntityNotFoundException("Department Not Found!");
+        }
+        Department department = repo.findById(id).get();
+        ViewDepartment viewDepartment = new ViewDepartment(department.getDepId(), department.getName(), department.getEstablished(), department.getEmployees(), EmployeeCount(id));
+        return viewDepartment;
+    }
     public String updateDept(@PathVariable String id, @RequestBody Department department) {
         if (repo.findById(id).isEmpty()) {
             return "Couldn't find the department!";

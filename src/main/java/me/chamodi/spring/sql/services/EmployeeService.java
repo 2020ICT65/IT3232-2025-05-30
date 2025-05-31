@@ -21,17 +21,17 @@ public class EmployeeService {
         return repo.getEmployeeInSalaryRange();
     }
 
-    public List<Employee> getEmployeesInDepartment(String deptid) {
-        if (repo.getEmployeesInDepartment(deptid).isEmpty()) {
-            throw new EntityNotFoundException("Department Not Found!");
-        }
-        return repo.getEmployeesInDepartment(deptid);
-    }
+    // public List<Employee> getEmployeesInDepartment(String deptid) {
+    //     if (repo.getEmployeesInDepartment(deptid).isEmpty()) {
+    //         throw new EntityNotFoundException("Department Not Found!");
+    //     }
+    //     return repo.getEmployeesInDepartment(deptid);
+    // }
 
-    public Employee getYoungestFemale() {
-        if (repo.getYoungestFemale()!= null){
-            throw new EntityNotFoundException("Department Not Found!");
-        }
-        return repo.getYoungestFemale();
-    }
+    // public Employee getYoungestFemale() {
+    //     if (repo.getYoungestFemale()!= null){
+    //         throw new EntityNotFoundException("Department Not Found!");
+    //     }
+    //     return repo.getYoungestFemale();
+    // }
 }

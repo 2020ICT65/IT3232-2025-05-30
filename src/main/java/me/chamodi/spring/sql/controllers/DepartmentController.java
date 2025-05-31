@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.chamodi.spring.sql.models.Department;
+import me.chamodi.spring.sql.models.ViewDepartment;
 import me.chamodi.spring.sql.services.DepartmentService;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -38,6 +39,21 @@ public class DepartmentController {
     @GetMapping("/names/{name}")
     public ResponseEntity<List<Department>>searchByName(@PathVariable("name") String name){
         return new ResponseEntity<List<Department>>(service.searchDept(name), HttpStatus.OK);
+    }
+
+    @GetMapping("/empcount")
+    public ResponseEntity<List<String>>countEmployees(){
+        return new ResponseEntity<List<String>>(service.countEmployees(), HttpStatus.OK);
+    }
+
+    @GetMapping("/empcountbyId{depId}")
+    public ResponseEntity<Integer>EmployeeCount(@PathVariable("depId") String depId){
+        return new ResponseEntity<Integer>(service.EmployeeCount(depId), HttpStatus.OK);
+    }
+
+    @GetMapping("/viewempcountbyId/{id}")
+    public ResponseEntity<ViewDepartment>viewempcountbyId(@PathVariable("depId") String depId){
+        return new ResponseEntity<ViewDepartment>(service.getEmplCountView(depId), HttpStatus.OK);
     }
 
     @PostMapping

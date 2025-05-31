@@ -26,6 +26,13 @@ public class Department {
 
     }
 
+    public Department(String depId, String name, Date established, List<Employee> employees) {
+        this.depId = depId;
+        this.name = name;
+        this.established = established;
+        this.employees = employees;
+    }
+
     public String getDepId() {
         return depId;
     }
