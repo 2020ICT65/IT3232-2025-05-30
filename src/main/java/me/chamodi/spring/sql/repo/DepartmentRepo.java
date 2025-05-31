@@ -20,7 +20,7 @@ public interface DepartmentRepo extends JpaRepository<Department, String>{
     @Query("SELECT d.name, count(e.department.depId) FROM Employee e JOIN Department d ON e.department.depId = d.depId group by d.depId")
     public List<String>countEmployees();
 
-    @Query("SELECT count(*) FROM Department d" + "JOIN d.employees "+"WHERE d.id = ?1")
+    @Query("SELECT count(d) FROM Department AS d " + "JOIN d.employees " + "WHERE d.id = ?1")
     public int employeeCount(String depId);
 
 }
